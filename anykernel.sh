@@ -165,6 +165,9 @@ append_file init.aries.rc "fsprops" init.aries1;
 replace_file /system/bin/mount_ext4.sh 755 mount_khaon_userdata.sh
 replace_file /system/bin/mount_khaon_userdata.sh 755 mount_khaon_userdata.sh
 
+# init.manta.rc
+append_file init.aries.rc "post-init" init.aries2;
+
 # end ramdisk changes
 
 # add SELinux commandline only in KitKat and lollipop

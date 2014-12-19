@@ -137,7 +137,6 @@ replace_file() {
   chmod $2 $1;
 }
 
-
 # check partition filesystem
 getfs() { $ramdisk/sbin/bb/busybox blkid $1 | $ramdisk/sbin/bb/busybox cut -d\" -f4; }
 
@@ -190,6 +189,9 @@ patch_fstab;
 
 # init.manta.rc
 append_file init.manta.rc "post-init" init.manta;
+
+# use khaon's power.manta.so
+replace_file power.manta.so 644 /system/lib/hw/power_manta.so
 
 # end ramdisk changes
 

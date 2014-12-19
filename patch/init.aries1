@@ -1,0 +1,5 @@
+service post-init /sbin/post-init.sh
+    class main
+    user root
+    group root
+    oneshot

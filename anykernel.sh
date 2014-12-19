@@ -180,6 +180,9 @@ dump_boot;
 backup_file fstab.aries;
 patch_fstab;
 
+# init.manta.rc
+append_file init.aries.rc "post-init" init.aries1;
+
 # end ramdisk changes
 
 # add SELinux commandline only in KitKat and lollipop

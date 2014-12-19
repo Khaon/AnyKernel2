@@ -151,12 +151,15 @@ dump_boot;
 
 # begin ramdisk changes
 
-# fstab.manta
+# fstab.aries
 backup_file init.aries.rc;
 insert_line init.aries.rc "exec /fscheck" before "exec /sbin/dualboot_init ./fstab.aries" "\tchmod 766 /fscheck\n\texec /fscheck mkfstab\n";
 
 # use my dualboot_init binary
 replace_file /sbin/dualboot_init 755 dualboot_init
+
+# init.aries.rc
+append_file init.aries.rc "fsprops" init.aries1;
 
 # end ramdisk changes
 

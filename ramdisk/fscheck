@@ -30,4 +30,3 @@ case $1 in
     setprop ro.fs.system `getfs $system`;
   ;;
 esac;
-

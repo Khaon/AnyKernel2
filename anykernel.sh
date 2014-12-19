@@ -161,6 +161,10 @@ replace_file /sbin/dualboot_init 755 dualboot_init
 # init.aries.rc
 append_file init.aries.rc "fsprops" init.aries1;
 
+# use Khaon's mount scripts and dual_boot_init
+replace_file /system/bin/mount_ext4.sh 755 mount_khaon_userdata.sh
+replace_file /system/bin/mount_khaon_userdata.sh 755 mount_khaon_userdata.sh
+
 # end ramdisk changes
 
 # add SELinux commandline only in KitKat and lollipop

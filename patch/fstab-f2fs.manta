@@ -1,0 +1,3 @@
+/dev/block/platform/dw_mmc.0/by-name/system     /system             f2fs      ro,fastboot                                                   wait
+/dev/block/platform/dw_mmc.0/by-name/cache      /cache              f2fs      noatime,nosuid,nodev,discard,nodiratime,inline_xattr,flush_merge    wait,check
+/dev/block/platform/dw_mmc.0/by-name/userdata   /data               f2fs      noatime,nosuid,nodev,discard,nodiratime,inline_xattr,inline_data,flush_merge,fastboot    wait,check,encryptable=/dev/block/platform/dw_mmc.0/by-name/metadata

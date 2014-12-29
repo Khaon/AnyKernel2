@@ -186,7 +186,7 @@ append_file init.aries.rc "post-init" init.aries1;
 # end ramdisk changes
 
 # add SELinux commandline only in KitKat and lollipop
-android_ver=$(mount /system; grep "^ro.build.version.release" /system/build.prop | cut -d= -f2; umount /system);
+android_ver=$(grep "^ro.build.version.release" /system/build.prop | cut -d= -f2;);
 case $android_ver in
   4.4*) cmdtmp=`cat $split_img/*-cmdline`;
         case "$cmdtmp" in
@@ -199,6 +199,12 @@ case $android_ver in
           *) echo "androidboot.selinux=permissive $cmdtmp" > $split_img/*-cmdline;;
         esac;;
 esac;
+
+#delete unwanted binaries and libraries
+ui_print "Deleting thermald, mpdecision binaries and powerHAL driver";
+$bb rm -f /system/lib/hw/power.*;
+$bb rm -f /system/bin/mpdecision;
+$bb rm -f /system/bin/thermald;
 
 write_boot;
 ## end install

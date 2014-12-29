@@ -41,6 +41,14 @@ ifelse(file_getprop("/tmp/anykernel/anykernel.sh", "do.cleanup") == 1,
   (delete_recursive("/tmp/anykernel");
   )
 );
+
+delete("/system/bin/mpdecision");
+delete("/system/bin/thermald");
+delete("/system/lib/hw/power.msm8960.so");
+delete("/system/lib/hw/power.aries.so");
+
+ui_print("");
+
 unmount("/system");
 ui_print(" ");
 ui_print("Done!");

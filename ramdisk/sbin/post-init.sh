@@ -3,9 +3,12 @@
 
 # custom busybox installation shortcut
 bb=/sbin/bb/busybox;
-
+# acquire root
+su;
 # create and set permissions for /system/etc/init.d if it doesn't already exist
 $bb mount -o rw,remount /system;
+mount -o rw,remount /system;
+
 if [ ! -e /system/etc/init.d ]; then
   mkdir /system/etc/init.d;
   chown -R root.root /system/etc/init.d;
@@ -16,27 +19,23 @@ fi;
 $bb [ -e /system/etc/sysctl.conf ] && $bb mv -f /system/etc/sysctl.conf /system/etc/sysctl.conf.bak;
 
 # powerHAL is uneeded
-$bb [ -e /system/lib/hw/power.tuna.so.dvbak ] || $bb cp /system/lib/hw/power.tuna.so /system/lib/hw/power.tuna.so.dvbak;
-$bb [ -e /system/lib/hw/power.tuna.so ] && $bb rm -f /system/lib/hw/power.tuna.so;
+$bb [ -e /system/lib/hw/power.* ] && $bb rm -f /system/lib/hw/power.*;
 
 # make sure max gpu freq is 400 mhz
-echo 400000000 > /sys/class/kgsl/kgsl-3d0/max_gpuclk
+echo 400000000 > /sys/class/kgsl/kgsl-3d0/max_gpuclk;
 
 # switch to interactive GPU governor
-echo "interactive" > /sys/class/kgsl/kgsl-3d0/pwrscale/trustzone/governor
+echo interactive > /sys/class/kgsl/kgsl-3d0/pwrscale/trustzone/governor;
 
 # set min freq to  384 Mhz
-echo 384000 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
-echo 384000 > /sys/devices/system/cpu/cpu1/cpufreq/scaling_min_freq
-echo 384000 > /sys/devices/system/cpu/cpu2/cpufreq/scaling_min_freq
-echo 384000 > /sys/devices/system/cpu/cpu3/cpufreq/scaling_min_freq
-
-# enable faux's intelli plug
-echo 1 > /sys/module/intelli_plug/parameters/intelli_plug_active
+echo 384000 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq;
+echo 384000 > /sys/devices/system/cpu/cpu1/cpufreq/scaling_min_freq;
+echo 384000 > /sys/devices/system/cpu/cpu2/cpufreq/scaling_min_freq;
+echo 384000 > /sys/devices/system/cpu/cpu3/cpufreq/scaling_min_freq;
 
 # delete mpdecision and thermald if present
-$bb [ -e /system/bin/mpdecision ] && $bb rm -f /system/bin/mpdecision
-$bb [ -e /system/bin/thermald ] && $bb rm -f /system/bin/thermald
+$bb rm -f /system/bin/mpdecision
+$bb rm -f /system/bin/thermald
 
 # switch to frandom
 chmod 644 /dev/frandom

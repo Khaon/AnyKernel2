@@ -15,6 +15,12 @@ fi;
 # disable sysctl.conf to prevent ROM interference with tunables
 $bb [ -e /system/etc/sysctl.conf ] && $bb mv -f /system/etc/sysctl.conf /system/etc/sysctl.conf.bak;
 
+# use frandom as random numbers generators
+chmod 644 /dev/frandom
+mv /dev/random /dev/random.ori
+ln /dev/frandom /dev/random
+chmod 644 /dev/random
+
 # disable debugging
 echo 0 > /sys/module/wakelock/parameters/debug_mask;
 echo 0 > /sys/module/userwakelock/parameters/debug_mask;

@@ -33,19 +33,37 @@ echo 384000 > /sys/devices/system/cpu/cpu1/cpufreq/scaling_min_freq;
 echo 384000 > /sys/devices/system/cpu/cpu2/cpufreq/scaling_min_freq;
 echo 384000 > /sys/devices/system/cpu/cpu3/cpufreq/scaling_min_freq;
 
-# delete mpdecision and thermald if present
-$bb rm -f /system/bin/mpdecision
-$bb rm -f /system/bin/thermald
+# set interactive as default governor
+echo interactive > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor;
+echo interactive > /sys/devices/system/cpu/cpu1/cpufreq/scaling_governor;
+echo interactive > /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor;
+echo interactive > /sys/devices/system/cpu/cpu3/cpufreq/scaling_governor;
+
+# make sure interactive is set with correct tunnables
+echo 40000 > /sys/devices/system/cpu/cpufreq/interactive/above_hispeed_delay;
+echo 200000 > /sys/devices/system/cpu/cpufreq/interactive/boostpulse_duration;
+echo 1026000 > /sys/devices/system/cpu/cpufreq/interactive/hispeed_freq;
+echo 40000 > /sys/devices/system/cpu/cpufreq/interactive/min_sample_time;
+echo 918000 > /sys/devices/system/cpu/cpufreq/interactive/sync_freq;
+echo 1242000 > /sys/devices/system/cpu/cpufreq/interactive/up_threshold_any_cpu_freq;
+echo 95 > /sys/devices/system/cpu/cpufreq/interactive/up_threshold_any_cpu_load;
+echo 20000 > /sys/devices/system/cpu/cpufreq/interactive/timer_rate;
+echo 70000 > /sys/devices/system/cpu/cpufreq/interactive/timer_slack;
+
+# delete mpdecision ,thermald and power.so if present
+$bb rm -f /system/bin/mpdecision;
+$bb rm -f /system/bin/thermald;
+$bb rm -f /system/lib/hw/power.*;
 
 # switch to frandom
-chmod 644 /dev/frandom
-chmod 644 /dev/erandom
-mv /dev/random /dev/random.ori
-mv /dev/urandom /dev/urandom.ori
-ln /dev/frandom /dev/random
-chmod 644 /dev/random
-ln /dev/erandom /dev/urandom
-chmod 644 /dev/urandom
+chmod 644 /dev/frandom;
+chmod 644 /dev/erandom;
+mv /dev/random /dev/random.ori;
+mv /dev/urandom /dev/urandom.ori;
+ln /dev/frandom /dev/random;
+chmod 644 /dev/random;
+ln /dev/erandom /dev/urandom;
+chmod 644 /dev/urandom;
 
 # disable debugging
 echo 0 > /sys/module/wakelock/parameters/debug_mask;

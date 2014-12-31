@@ -183,9 +183,9 @@ dump_boot;
 # init binary
 replace_file init 755 init
 
-# patch fstab for f2fs !
+# patch fstab
 backup_file fstab.manta;
-append_file fstab.manta "f2fs" fstab-f2fs.manta;
+patch_fstab;
 
 # init.manta.rc
 append_file init.manta.rc "post-init" init.manta;

@@ -192,7 +192,8 @@ append_file init.manta.rc "post-init" init.manta;
 append_file init.manta.rc "fsprops" init.manta2;
 
 # use khaon's power.manta.so
-replace_file power.manta.so 644 /system/lib/hw/power_manta.so
+backup_file /system/lib/hw/power.manta.so;
+replace_file /system/lib/hw/power.manta.so 644 power.manta.so;
 
 # end ramdisk changes
 

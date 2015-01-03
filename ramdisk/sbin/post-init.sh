@@ -135,7 +135,7 @@ while sleep 60; do
   for class in $list; do
     if [ "$($bb pgrep $class)" ]; then
       for launcher in `$bb pgrep $class`; do
-        echo -17 > /proc/$launcher/oom_adj;
+        echo -17 > /proc/$launcher/oom_score_adj;
         $bb renice -18 $launcher;
       done;
     fi;

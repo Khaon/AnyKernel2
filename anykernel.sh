@@ -115,6 +115,13 @@ remove_line() {
   fi;
 }
 
+#remove__all_lines <file> <line match string>
+remove_all_lines() {
+  if [ ! -z "$(grep "$2" $1)" ]; then
+    sed -i "/${2}/d" $1;
+  fi;
+}
+
 # prepend_file <file> <if search string> <patch file>
 prepend_file() {
   if [ -z "$(grep "$2" $1)" ]; then
@@ -160,6 +167,9 @@ replace_file /sbin/dualboot_init 755 dualboot_init
 
 # init.aries.rc
 append_file init.aries.rc "fsprops" init.aries1;
+remove_all_lines init.aries.rc "governor";
+remove_all_lines init.aries.rc "msm_thermal";
+remove_all_lines init.aries.rc "st.* mpdecision";
 
 # use Khaon's mount scripts and dual_boot_init
 replace_file /system/bin/mount_ext4.sh 755 mount_khaon_userdata.sh

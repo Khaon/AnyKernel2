@@ -120,6 +120,13 @@ remove_line() {
   fi;
 }
 
+#remove__all_lines <file> <line match string>
+remove_all_lines() {
+  if [ ! -z "$(grep "$2" $1)" ]; then
+    sed -i "/${2}/d" $1;
+  fi;
+}
+
 # prepend_file <file> <if search string> <patch file>
 prepend_file() {
   if [ -z "$(grep "$2" $1)" ]; then
@@ -179,6 +186,11 @@ dump_boot;
 # fstab.manta
 backup_file fstab.aries;
 patch_fstab;
+
+# init.aries.rc
+remove_all_lines init.aries.rc "governor";
+remove_all_lines init.aries.rc "msm_thermal";
+remove_all_lines init.aries.rc "st.* mpdecision";
 
 # init.manta.rc
 append_file init.aries.rc "post-init" init.aries1;

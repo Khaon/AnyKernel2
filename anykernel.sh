@@ -163,10 +163,11 @@ backup_file init.aries.rc;
 insert_line init.aries.rc "exec /fscheck" before "exec /sbin/dualboot_init ./fstab.aries" "\tchmod 766 /fscheck\n\texec /fscheck mkfstab\n";
 
 # use my dualboot_init binary
-replace_file /sbin/dualboot_init 755 dualboot_init
+replace_file $ramdisk/sbin/dualboot_init 755 dualboot_init;
 
 # init.aries.rc
 append_file init.aries.rc "fsprops" init.aries1;
+append_file init.aries.rc "post-init" init.aries2;
 remove_all_lines init.aries.rc "governor";
 remove_all_lines init.aries.rc "msm_thermal";
 remove_all_lines init.aries.rc "st.* mpdecision";
@@ -174,9 +175,6 @@ remove_all_lines init.aries.rc "st.* mpdecision";
 # use Khaon's mount scripts and dual_boot_init
 replace_file /system/bin/mount_ext4.sh 755 mount_khaon_userdata.sh
 replace_file /system/bin/mount_khaon_userdata.sh 755 mount_khaon_userdata.sh
-
-# init.manta.rc
-append_file init.aries.rc "post-init" init.aries2;
 
 # end ramdisk changes
 
@@ -199,10 +197,10 @@ esac;
 ui_print "";
 ui_print "Deleting thermald, mpdecision binaries and powerHAL driver";
 
-$ramdisk/sbin/bb/busybox rm -f /system/lib/hw/power.*;
+$ramdisk/sbin/bb/busybox rm -f /system/lib/hw/power.aries.so;
+$ramdisk/sbin/bb/busybox rm -f /system/lib/hw/power.msm8960.so;
 $ramdisk/sbin/bb/busybox rm -f /system/bin/mpdecision;
 $ramdisk/sbin/bb/busybox rm -f /system/bin/thermald;
 
 write_boot;
 ## end install
-

@@ -189,8 +189,10 @@ patch_fstab;
 
 # init.aries.rc
 remove_all_lines init.aries.rc "governor";
+remove_all_lines init.aries.rc "scaling";
 remove_all_lines init.aries.rc "msm_thermal";
 remove_all_lines init.aries.rc "st.* mpdecision";
+remove_all_lines init.aries.rc "st.* thermald";
 
 # init.manta.rc
 append_file init.aries.rc "post-init" init.aries1;
@@ -214,7 +216,8 @@ esac;
 
 #delete unwanted binaries and libraries
 ui_print "Deleting thermald, mpdecision binaries and powerHAL driver";
-$bb rm -f /system/lib/hw/power.*;
+$bb rm -f /system/lib/hw/power.msm8960.so;
+$bb rm -f /system/lib/hw/power.aries.so;
 $bb rm -f /system/bin/mpdecision;
 $bb rm -f /system/bin/thermald;
 

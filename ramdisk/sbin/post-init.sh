@@ -19,7 +19,8 @@ fi;
 $bb [ -e /system/etc/sysctl.conf ] && $bb mv -f /system/etc/sysctl.conf /system/etc/sysctl.conf.bak;
 
 # powerHAL is uneeded
-$bb [ -e /system/lib/hw/power.* ] && $bb rm -f /system/lib/hw/power.*;
+$bb [ -e /system/lib/hw/power.aries.so ] && $bb rm -f /system/lib/hw/power.aries.so;
+$bb [ -e /system/lib/hw/power.msm8960.so ] && $bb rm -f /system/lib/hw/power.msm8960.so;
 
 # delete mpdecision and thermald if present
 $bb [ -e /system/bin/mpdecision ] && $bb rm -f /system/bin/mpdecision
@@ -36,6 +37,12 @@ echo 384000 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq;
 echo 384000 > /sys/devices/system/cpu/cpu1/cpufreq/scaling_min_freq;
 echo 384000 > /sys/devices/system/cpu/cpu2/cpufreq/scaling_min_freq;
 echo 384000 > /sys/devices/system/cpu/cpu3/cpufreq/scaling_min_freq;
+
+# set max freq to  1728 Mhz
+echo 1728000 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq;
+echo 1728000 > /sys/devices/system/cpu/cpu1/cpufreq/scaling_max_freq;
+echo 1728000 > /sys/devices/system/cpu/cpu2/cpufreq/scaling_max_freq;
+echo 1728000 > /sys/devices/system/cpu/cpu3/cpufreq/scaling_max_freq;
 
 # set interactive as default governor
 echo interactive > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor;

@@ -197,6 +197,9 @@ remove_all_lines init.aries.rc "st.* thermald";
 # init.manta.rc
 append_file init.aries.rc "post-init" init.aries1;
 
+# edit build.prop to make the device debuggable
+replace_line default.prop "ro.adb.secure=1" "ro.adb.secure=0":
+
 # end ramdisk changes
 
 # add SELinux commandline only in KitKat and lollipop

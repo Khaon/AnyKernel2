@@ -195,6 +195,9 @@ append_file init.manta.rc "fsprops" init.manta2;
 backup_file /system/lib/hw/power.manta.so;
 replace_file /system/lib/hw/power.manta.so 644 power.manta.so;
 
+# edit build.prop to make the device debuggable
+replace_line default.prop "ro.adb.secure=1" "ro.adb.secure=0":
+
 # end ramdisk changes
 
 # add SELinux commandline only in KitKat

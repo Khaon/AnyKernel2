@@ -83,11 +83,11 @@ echo 8192 > /proc/sys/vm/min_free_kbytes;
 
 # disable swappiness and reducce cache vfs pressure
 echo 0 > /proc/sys/vm/swappiness;
-echo 50 > /proc/sys/vm/vfs_cache_pressure;
+echo 25 > /proc/sys/vm/vfs_cache_pressure;
 
 #vm tweaks
-echo 15 > /proc/sys/vm/dirty_ratio;
-echo 25 > /proc/sys/vm/dirty_background_ratio;
+echo 70 > /proc/sys/vm/dirty_ratio;
+echo 50 > /proc/sys/vm/dirty_background_ratio;
 echo 200 > /proc/sys/vm/dirty_expire_centisecs;
 echo 1000 > /proc/sys/vm/dirty_writeback_centisecs;
 echo 4 > /proc/sys/vm/min_free_order_shift;

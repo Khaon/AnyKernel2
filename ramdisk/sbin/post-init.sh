@@ -21,6 +21,12 @@ $bb [ -e /system/etc/sysctl.conf ] && $bb mv -f /system/etc/sysctl.conf /system/
 #ln /dev/frandom /dev/random
 #chmod 644 /dev/random
 
+# interactive tweaking
+echo "70 300000:70 400000:75 500000:80 800000:85 1000000:70 1100000:80 1200000:85 1300000:90 1400000:95 1500000:99" > /sys/devices/system/cpu/cpufreq/interactive/target_loads;
+echo 17000 > /sys/devices/system/cpu/cpufreq/interactive/sync_freq;
+echo 14000 > /sys/devices/system/cpu/cpufreq/interactive/up_threshold_any_cpu_freq;
+echo 95 > /sys/devices/system/cpu/cpufreq/interactive/up_threshold_any_cpu_load;
+
 # disable debugging
 echo 0 > /sys/module/wakelock/parameters/debug_mask;
 echo 0 > /sys/module/userwakelock/parameters/debug_mask;

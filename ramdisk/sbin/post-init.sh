@@ -32,11 +32,11 @@ echo 400000000 > /sys/class/kgsl/kgsl-3d0/max_gpuclk;
 # switch to interactive GPU governor
 echo interactive > /sys/class/kgsl/kgsl-3d0/pwrscale/trustzone/governor;
 
-# set min freq to  384 Mhz
-echo 384000 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq;
-echo 384000 > /sys/devices/system/cpu/cpu1/cpufreq/scaling_min_freq;
-echo 384000 > /sys/devices/system/cpu/cpu2/cpufreq/scaling_min_freq;
-echo 384000 > /sys/devices/system/cpu/cpu3/cpufreq/scaling_min_freq;
+# set min freq to  378 Mhz
+echo 378000 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq;
+echo 378000 > /sys/devices/system/cpu/cpu1/cpufreq/scaling_min_freq;
+echo 378000 > /sys/devices/system/cpu/cpu2/cpufreq/scaling_min_freq;
+echo 378000 > /sys/devices/system/cpu/cpu3/cpufreq/scaling_min_freq;
 
 # set max freq to  1728 Mhz
 echo 1728000 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq;

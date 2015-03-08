@@ -200,7 +200,7 @@ replace_file /system/lib/hw/power.manta.so 644 power.manta.so;
 replace_line default.prop "ro.adb.secure=1" "ro.adb.secure=0":
 
 # USB OTG support
-insert_line init.manta.rc "OTG" after "start watchdogd" "# USB OTG support\n\tmkdir /mnt/media_rw/usbdisk 0700 media_rw media_rw\n\tmkdir /storage/usbdisk 0700 root root\n\tsymlink /storage/usbdisk /mnt/usbdisk\n\tsymlink /mnt/usbdisk /usbdisk\n\tEXPORT SECONDARY_STORAGE /storage/usbdisk\n";
+insert_line init.manta.rc "usbdisk" after "start watchdogd" "# USB OTG support\n\tmkdir /mnt/media_rw/usbdisk 0700 media_rw media_rw\n\tmkdir /storage/usbdisk 0700 root root\n\tsymlink /storage/usbdisk /mnt/usbdisk\n\tsymlink /mnt/usbdisk /usbdisk\n\tEXPORT SECONDARY_STORAGE /storage/usbdisk\n";
 append_file fstab.manta "s5p-ehci" fstab.manta;
 
 # end ramdisk changes

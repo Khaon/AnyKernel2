@@ -23,8 +23,8 @@ $bb [ -e /system/etc/sysctl.conf ] && $bb mv -f /system/etc/sysctl.conf /system/
 
 # interactive tweaking
 echo "70 300000:70 400000:75 500000:80 800000:85 1000000:70 1100000:80 1200000:85 1300000:90 1400000:95 1500000:99" > /sys/devices/system/cpu/cpufreq/interactive/target_loads;
-echo 17000 > /sys/devices/system/cpu/cpufreq/interactive/sync_freq;
-echo 14000 > /sys/devices/system/cpu/cpufreq/interactive/up_threshold_any_cpu_freq;
+echo 1700000 > /sys/devices/system/cpu/cpufreq/interactive/sync_freq;
+echo 1400000 > /sys/devices/system/cpu/cpufreq/interactive/up_threshold_any_cpu_freq;
 echo 95 > /sys/devices/system/cpu/cpufreq/interactive/up_threshold_any_cpu_load;
 
 # disable debugging
@@ -89,7 +89,7 @@ echo 8192 > /proc/sys/vm/min_free_kbytes;
 
 # disable swappiness and reducce cache vfs pressure
 echo 0 > /proc/sys/vm/swappiness;
-echo 35 > /proc/sys/vm/vfs_cache_pressure;
+echo 50 > /proc/sys/vm/vfs_cache_pressure;
 
 #vm tweaks
 echo 15 > /proc/sys/vm/dirty_ratio;
@@ -102,7 +102,7 @@ echo 3 > /proc/sys/vm/page-cluster;
 # general queue tweaks
 for i in /sys/block/*/queue; do
   echo 512 > $i/nr_requests;
-  echo 1024 > $i/read_ahead_kb;
+  echo 512 > $i/read_ahead_kb;
   echo 2 > $i/rq_affinity;
   echo 0 > $i/nomerges;
   echo 0 > $i/add_random;

@@ -54,12 +54,12 @@ echo interactive > /sys/devices/system/cpu/cpu3/cpufreq/scaling_governor;
 echo 40000 > /sys/devices/system/cpu/cpufreq/interactive/above_hispeed_delay;
 echo 200000 > /sys/devices/system/cpu/cpufreq/interactive/boostpulse_duration;
 echo 1134000 > /sys/devices/system/cpu/cpufreq/interactive/hispeed_freq;
-echo 40000 > /sys/devices/system/cpu/cpufreq/interactive/min_sample_time;
+echo 60000 > /sys/devices/system/cpu/cpufreq/interactive/min_sample_time;
 echo 918000 > /sys/devices/system/cpu/cpufreq/interactive/sync_freq;
 echo 1350000 > /sys/devices/system/cpu/cpufreq/interactive/up_threshold_any_cpu_freq;
 echo 95 > /sys/devices/system/cpu/cpufreq/interactive/up_threshold_any_cpu_load;
-echo 20000 > /sys/devices/system/cpu/cpufreq/interactive/timer_rate;
-echo 80000 > /sys/devices/system/cpu/cpufreq/interactive/timer_slack;
+echo 30000 > /sys/devices/system/cpu/cpufreq/interactive/timer_rate;
+echo 90000 > /sys/devices/system/cpu/cpufreq/interactive/timer_slack;
 
 # disable debugging
 echo 0 > /sys/module/wakelock/parameters/debug_mask;

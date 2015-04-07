@@ -197,7 +197,7 @@ backup_file /system/lib/hw/power.manta.so;
 replace_file /system/lib/hw/power.manta.so 644 power.manta.so;
 
 # edit build.prop to make the device debuggable
-replace_line default.prop "ro.adb.secure=1" "ro.adb.secure=0":
+replace_line default.prop "ro.adb.secure=0" "ro.adb.secure=1":
 
 # USB OTG support
 insert_line init.manta.rc "usbdisk" after "start watchdogd" "# USB OTG support\n\tmkdir /mnt/media_rw/usbdisk 0700 media_rw media_rw\n\tmkdir /storage/usbdisk 0700 root root\n\tsymlink /storage/usbdisk /mnt/usbdisk\n\tsymlink /mnt/usbdisk /usbdisk\n\tEXPORT SECONDARY_STORAGE /storage/usbdisk\n";
@@ -206,14 +206,14 @@ append_file fstab.manta "s5p-ehci" fstab.manta;
 # end ramdisk changes
 
 # add SELinux commandline only in KitKat
-android_ver=$(mount /system; grep "^ro.build.version.release" /system/build.prop | cut -d= -f2; umount /system);
+android_ver=$(mount /system; grep "^ro.build.version.release" /system/build.prop | cut -d= -f2;);
 case $android_ver in
   4.4*) cmdtmp=`cat $split_img/*-cmdline`;
         case "$cmdtmp" in
           *selinux=permissive*) ;;
           *) echo "androidboot.selinux=permissive $cmdtmp" > $split_img/*-cmdline;;
         esac;;
-  5.0*) cmdtmp=`cat $split_img/*-cmdline`;
+  5.*) cmdtmp=`cat $split_img/*-cmdline`;
         case "$cmdtmp" in
           *selinux=permissive*) ;;
           *) echo "androidboot.selinux=permissive $cmdtmp" > $split_img/*-cmdline;;

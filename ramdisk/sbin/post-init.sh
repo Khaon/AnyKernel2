@@ -46,7 +46,7 @@ for i in /sys/class/net/*; do
 done;
 
 # tweak for slightly larger kernel entropy pool
-echo 512 > /proc/sys/kernel/random/read_wakeup_threshold;
+echo 128 > /proc/sys/kernel/random/read_wakeup_threshold;
 echo 256 > /proc/sys/kernel/random/write_wakeup_threshold;
 
 # increase sched timings

@@ -169,8 +169,10 @@ replace_file $ramdisk/sbin/dualboot_init 755 dualboot_init;
 append_file init.aries.rc "fsprops" init.aries1;
 append_file init.aries.rc "post-init" init.aries2;
 remove_all_lines init.aries.rc "governor";
+remove_all_lines init.aries.rc "scaling";
 remove_all_lines init.aries.rc "msm_thermal";
 remove_all_lines init.aries.rc "st.* mpdecision";
+remove_all_lines init.aries.rc "st.* thermald";
 
 # use Khaon's mount scripts and dual_boot_init
 replace_file /system/bin/mount_ext4.sh 755 mount_khaon_userdata.sh

@@ -178,6 +178,9 @@ remove_all_lines init.aries.rc "st.* thermald";
 replace_file /system/bin/mount_ext4.sh 755 mount_khaon_userdata.sh
 replace_file /system/bin/mount_khaon_userdata.sh 755 mount_khaon_userdata.sh
 
+# edit build.prop to make the device debuggable
+replace_line default.prop "ro.adb.secure=1" "ro.adb.secure=0";
+
 # end ramdisk changes
 
 # add SELinux commandline only in KitKat and lollipop

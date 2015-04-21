@@ -31,13 +31,13 @@ getfs() { /sbin/bb/busybox blkid $1 | /sbin/bb/busybox cut -d\" -f4; }
 
 # mount partition
 if [ -e ${BLOCK_DEVICE} ]; then
-	if [ `getfs ${BLOCK_NODE}` == "f2fs" ]; then  
-      FS_TYPE=f2fs
-      OPTS=rw,noatime,nosuid,nodev,discard,nodiratime,inline_xattr,inline_data,flush_merge
-	else		 
-      FS_TYPE=ext4
-      OPTS=noatime,nosuid,nodev,barrier=1,noauto_da_alloc
-	fi;
+    if [ `getfs ${BLOCK_NODE}` == "f2fs" ]; then
+        FS_TYPE=f2fs
+        OPTS=rw,noatime,nosuid,nodev,discard,nodiratime,inline_xattr,inline_data,flush_merge
+    else
+        FS_TYPE=ext4
+        OPTS=noatime,nosuid,nodev,barrier=1,noauto_da_alloc
+    fi;
 fi
 
 # mount partition

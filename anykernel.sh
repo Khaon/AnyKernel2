@@ -203,6 +203,9 @@ replace_line default.prop "ro.adb.secure=0" "ro.adb.secure=1":
 insert_line init.manta.rc "usbdisk" after "start watchdogd" "# USB OTG support\n\tmkdir /mnt/media_rw/usbdisk 0700 media_rw media_rw\n\tmkdir /storage/usbdisk 0700 root root\n\tsymlink /storage/usbdisk /mnt/usbdisk\n\tsymlink /mnt/usbdisk /usbdisk\n\tEXPORT SECONDARY_STORAGE /storage/usbdisk\n";
 append_file fstab.manta "s5p-ehci" fstab.manta;
 
+# D2W support
+insert_line init.manta.rc "D2W" after "smb347-regs" "    # permission for D2W\n    chmod 0664 /sys/devices/platform/s3c2440-i2c.3/i2c-3/3-004a/suspended\n    chown system system /sys/devices/platform/s3c2440-i2c.3/i2c-3/3-004a/suspended\n";
+
 # end ramdisk changes
 
 # add SELinux commandline only in KitKat

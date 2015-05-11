@@ -204,6 +204,7 @@ insert_line init.manta.rc "usbdisk" after "start watchdogd" "# USB OTG support\n
 append_file fstab.manta "s5p-ehci" fstab.manta;
 
 # D2W support
+insert_line init.manta.rc "DT2W" before "smb347-regs" "    # permission for DT2W\n    chmod 0664 /sys/android_touch/suspended\n    chown system system /sys/android_touch/suspended\n\n";
 insert_line init.manta.rc "D2W" after "smb347-regs" "    # permission for D2W\n    chmod 0664 /sys/devices/platform/s3c2440-i2c.3/i2c-3/3-004a/suspended\n    chown system system /sys/devices/platform/s3c2440-i2c.3/i2c-3/3-004a/suspended\n";
 
 # end ramdisk changes

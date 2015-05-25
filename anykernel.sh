@@ -191,6 +191,7 @@ patch_fstab;
 append_file init.manta.rc "post-init" init.manta;
 append_file init.manta.rc "fsprops" init.manta2;
 append_file init.manta.rc "fuse_usbdisk" init.manta3;
+append_file init.manta.rc "run-parts" init.manta4;
 
 # use khaon's power.manta.so
 backup_file /system/lib/hw/power.manta.so;

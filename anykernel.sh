@@ -208,6 +208,9 @@ append_file fstab.manta "s5p-ehci" fstab.manta;
 insert_line init.manta.rc "DT2W" before "smb347-regs" "    # permission for DT2W\n    chmod 0664 /sys/android_touch/suspended\n    chown system system /sys/android_touch/suspended\n\n";
 insert_line init.manta.rc "D2W" after "smb347-regs" "    # permission for D2W\n    chmod 0664 /sys/devices/platform/s3c2440-i2c.3/i2c-3/3-004a/suspended\n    chown system system /sys/devices/platform/s3c2440-i2c.3/i2c-3/3-004a/suspended\n";
 
+# GPU init.d script
+replace_file /system/etc/init.d/99khaon_gpu_controls 775 99khaon_gpu_controls;
+
 # end ramdisk changes
 
 # add SELinux commandline only in KitKat

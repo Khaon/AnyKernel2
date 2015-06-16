@@ -1,0 +1,18 @@
+#!/system/bin/sh
+
+gpu_table="100Mhz:875
+160Mhz:900
+266Mhz:900
+350Mhz:950
+400Mhz:1000
+450Mhz:1050
+533Mhz:1100
+612Mhz:1150
+667Mhz:1200
+720Mhz:1250"
+
+echo 533 > /sys/devices/platform/mali.0/dvfs_upper_lock;
+echo 0 > /sys/devices/platform/mali.0/dvfs_under_lock;
+echo 350 > /sys/devices/platform/mali.0/dvfs_gpu_boost_freq;
+echo 150 > /sys/devices/platform/mali.0/dvfs_boost_time_duration;
+echo $gpu_table > /sys/devices/platform/mali.0/asv;

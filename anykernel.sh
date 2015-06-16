@@ -187,6 +187,11 @@ dump_boot;
 
 patch_fstab;
 
+# GPU init.d script
+if [ ! -e /system/etc/init.d/99khaon_gpu_controls ]; then
+	replace_file /system/etc/init.d/99khaon_gpu_controls 775 99khaon_gpu_controls;
+fi;
+
 # end ramdisk changes
 
 write_boot;

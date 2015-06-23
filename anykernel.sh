@@ -213,21 +213,6 @@ replace_file /system/etc/init.d/99khaon_gpu_controls 775 99khaon_gpu_controls;
 
 # end ramdisk changes
 
-# add SELinux commandline only in KitKat
-android_ver=$(mount /system; grep "^ro.build.version.release" /system/build.prop | cut -d= -f2;);
-case $android_ver in
-  4.4*) cmdtmp=`cat $split_img/*-cmdline`;
-        case "$cmdtmp" in
-          *selinux=permissive*) ;;
-          *) echo "androidboot.selinux=permissive $cmdtmp" > $split_img/*-cmdline;;
-        esac;;
-  5.*) cmdtmp=`cat $split_img/*-cmdline`;
-        case "$cmdtmp" in
-          *selinux=permissive*) ;;
-          *) echo "androidboot.selinux=permissive $cmdtmp" > $split_img/*-cmdline;;
-        esac;;
-esac;
-
 write_boot;
 
 ## end install

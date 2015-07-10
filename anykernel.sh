@@ -180,9 +180,6 @@ dump_boot;
 
 # begin ramdisk changes
 
-# init binary
-replace_file init 755 init
-
 # patch fstab
 backup_file fstab.manta;
 patch_fstab;

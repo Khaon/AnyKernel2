@@ -146,7 +146,7 @@ replace_file() {
 # check partition filesystem
 getfs() { $ramdisk/sbin/bb/busybox blkid $1 | $ramdisk/sbin/bb/busybox cut -d\" -f4; }
 
-# patch the fstab accordingly to the partitions' file systems
+# patch the fstab accordingly to the current partitions's file systems
 patch_fstab() {
   bb=$ramdisk/sbin/bb/busybox;
   cache=/dev/block/platform/dw_mmc.0/by-name/cache;
@@ -193,8 +193,10 @@ patch_fstab;
 # init.manta.rc
 append_file init.manta.rc "post-init" init.manta;
 append_file init.manta.rc "fsprops" init.manta2;
-append_file init.manta.rc "fuse_usbdisk" init.manta3;
-append_file init.manta.rc "run-parts" init.manta4;
+append_file init.manta.rc "usbdisk" init.manta3;
+if [ ! -f $ramdisk/init.cm.rc ]; then
+	append_file init.manta.rc "run-parts" init.manta4;
+fi;
 
 # use khaon's power.manta.so
 backup_file /system/lib/hw/power.manta.so;

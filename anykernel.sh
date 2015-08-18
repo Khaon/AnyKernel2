@@ -188,7 +188,7 @@ patch_fstab;
 append_file init.manta.rc "post-init" init.manta;
 append_file init.manta.rc "fsprops" init.manta2;
 append_file init.manta.rc "usbdisk" init.manta3;
-if [ ! -f $ramdisk/init.cm.rc ]; then
+if [ ! -e $ramdisk/init.cm.rc ]; then
 	append_file init.manta.rc "run-parts" init.manta4;
 fi;
 
@@ -215,4 +215,3 @@ replace_file /system/etc/init.d/99khaon_gpu_controls 775 99khaon_gpu_controls;
 write_boot;
 
 ## end install
-

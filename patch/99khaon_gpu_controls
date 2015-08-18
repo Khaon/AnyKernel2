@@ -1,5 +1,6 @@
 #!/system/bin/sh
 
+#Must be a multiple of 25 mv
 gpu_voltage_table="100mhz:875 mV 160mhz:900 mV 266mhz:900 mV 350mhz:950 mV 400mhz:1000 mV 450mhz:1050 mV 533mhz:1100 mV 612mhz:1150 mV 667mhz:1200 mV 720mhz:1250";
 
 echo 533 > /sys/devices/platform/mali.0/dvfs_upper_lock;

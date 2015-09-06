@@ -26,6 +26,7 @@ ramdisk=/tmp/anykernel/ramdisk;
 bin=/tmp/anykernel/tools;
 split_img=/tmp/anykernel/split_img;
 patch=/tmp/anykernel/patch;
+bb=$ramdisk/sbin/bb/busybox;
 
 chmod -R 755 $bin;
 mkdir -p $ramdisk $split_img;
@@ -42,7 +43,40 @@ dump_boot() {
     ui_print " "; ui_print "Dumping/unpacking image failed. Aborting...";
     echo 1 > /tmp/anykernel/exitcode; exit;
   fi;
-  gunzip -c $split_img/boot.img-ramdisk.gz | cpio -i;
+  file=`$bb basename "/tmp/anykernel/boot.img"`;
+  cd $split_img;
+  $bin/file -m $bin/magic.mgc $split_img/boot.img-ramdisk.gz | $bb cut -d: -f2 | $bb cut -d" " -f2 > "$file-ramdiskcomp";
+  ramdiskcomp=`cat *-ramdiskcomp`;
+  unpackcmd="$bb $ramdiskcomp -dc";
+  compext=$ramdiskcomp;
+  case $ramdiskcomp in
+    gzip) compext=gz;;
+    lzop) compext=lzo;;
+    xz) ;;
+    lzma) ;;
+    bzip2) compext=bz2;;
+    lz4) unpackcmd="$bin/lz4 -dq"; extra="stdout";;
+    *) compext="";;
+  esac;
+  ui_print " "; ui_print "Ramdisk was compressed with $ramdiskcomp"; ui_print " ";
+  if [ "$compext" ]; then
+    compext=.$compext;
+  fi;
+  mv "$file-ramdisk.gz" "$file-ramdisk.cpio$compext";
+  cd ..;
+
+  echo '\nUnpacking ramdisk to "ramdisk/"...\n';
+  cd ramdisk;
+  echo "Compression used: $ramdiskcomp";
+  if [ ! "$compext" ]; then
+    abort;
+    return 1;
+  fi;
+  $unpackcmd "../split_img/$file-ramdisk.cpio$compext" $extra | $bb cpio -i;
+  if [ $? != "0" ]; then
+    abort;
+    return 1;
+  fi;
 }
 
 # repack ramdisk then build and write image

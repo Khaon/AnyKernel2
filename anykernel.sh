@@ -104,6 +104,7 @@ write_boot() {
   cd $ramdisk;
   find . | cpio -H newc -o | $bin/lz4 -l -9 > /tmp/anykernel/ramdisk-new.cpio.lz4;
   $bin/mkbootimg --kernel /tmp/anykernel/zImage --ramdisk /tmp/anykernel/ramdisk-new.cpio.lz4 $second --cmdline "$cmdline" --board "$board" --base $base --pagesize $pagesize --kernel_offset $kerneloff --ramdisk_offset $ramdiskoff $secondoff --tags_offset $tagsoff $dtb --output /tmp/anykernel/boot-new.img;
+  ui_print " "; ui_print "repacking the ramdisk with lz4 algorithm";
   if [ $? != 0 -o `wc -c < /tmp/anykernel/boot-new.img` -gt `wc -c < /tmp/anykernel/boot.img` ]; then
     ui_print " "; ui_print "Repacking image failed. Aborting...";
     echo 1 > /tmp/anykernel/exitcode; exit;

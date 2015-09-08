@@ -45,7 +45,7 @@ dump_boot() {
   fi;
   file=`$bb basename "/tmp/anykernel/boot.img"`;
   cd $split_img;
-  $bin/file -m $bin/magic.mgc $split_img/boot.img-ramdisk.gz | $bb cut -d: -f2 | $bb cut -d" " -f2 > "$file-ramdiskcomp";
+  $bin/file -m $bin/magic $split_img/boot.img-ramdisk.gz | $bb cut -d: -f2 | $bb cut -d" " -f2 > "$file-ramdiskcomp";
   ramdiskcomp=`cat *-ramdiskcomp`;
   unpackcmd="$bb $ramdiskcomp -dc";
   compext=$ramdiskcomp;
@@ -55,7 +55,7 @@ dump_boot() {
     xz) ;;
     lzma) ;;
     bzip2) compext=bz2;;
-    LZ4) unpackcmd="$bin/lz4 -dq"; extra="stdout";;
+    lz4) unpackcmd="$bin/lz4 -dq"; extra="stdout";;
     *) compext="";;
   esac;
   ui_print " "; ui_print "Ramdisk was compressed with $ramdiskcomp"; ui_print " ";

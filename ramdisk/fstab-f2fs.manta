@@ -5,8 +5,8 @@
 
 
 /dev/block/platform/dw_mmc.0/by-name/system     /system             f2fs      ro                                                   wait
-/dev/block/platform/dw_mmc.0/by-name/cache      /cache              f2fs      noatime,nosuid,nodev,discard,nodiratime,inline_xattr,inline_data,flush_merge    wait,check
-/dev/block/platform/dw_mmc.0/by-name/userdata   /data               f2fs      noatime,nosuid,nodev,discard,nodiratime,inline_xattr,inline_data,flush_merge   wait,check,encryptable=/dev/block/platform/dw_mmc.0/by-name/metadata
+/dev/block/platform/dw_mmc.0/by-name/cache      /cache              f2fs      rw,noatime,nosuid,nodev,discard,nodiratime,inline_xattr,inline_data,flush_merge    wait,check
+/dev/block/platform/dw_mmc.0/by-name/userdata   /data               f2fs      rw,noatime,nosuid,nodev,discard,nodiratime,inline_xattr,inline_data,flush_merge   wait,check,encryptable=/dev/block/platform/dw_mmc.0/by-name/metadata
 /dev/block/platform/dw_mmc.0/by-name/efs        /factory            ext4      noatime,nosuid,nodev,ro                               wait
 /dev/block/platform/dw_mmc.0/by-name/boot       /boot               emmc      defaults                                              defaults
 /dev/block/platform/dw_mmc.0/by-name/recovery   /recovery           emmc      defaults                                              defaults

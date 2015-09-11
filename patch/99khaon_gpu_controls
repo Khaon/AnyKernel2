@@ -7,7 +7,7 @@ gpu_dvfs_table="100mhz:0,55 160mhz:50,70 266mhz:60,79 350mhz:70,86 400mhz:80,95 
 
 echo 533 > /sys/devices/platform/mali.0/dvfs_upper_lock;
 echo 0 > /sys/devices/platform/mali.0/dvfs_under_lock;
-echo 350 > /sys/devices/platform/mali.0/dvfs_gpu_boost_freq;
-echo 350 > /sys/devices/platform/mali.0/dvfs_boost_time_duration;
+echo 400 > /sys/devices/platform/mali.0/dvfs_gpu_boost_freq;
+echo 300 > /sys/devices/platform/mali.0/dvfs_boost_time_duration;
 echo $gpu_voltage_table > /sys/devices/platform/mali.0/asv;
 echo $gpu_dvfs_table > /sys/devices/platform/mali.0/dvfs_gpu_table;

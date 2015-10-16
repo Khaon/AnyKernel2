@@ -219,31 +219,8 @@ dump_boot;
 backup_file fstab.manta;
 patch_fstab;
 
-# init.manta.rc
-append_file init.manta.rc "post-init" init.manta;
-append_file init.manta.rc "fsprops" init.manta2;
-append_file init.manta.rc "usbdisk" init.manta3;
-if [ ! -e $ramdisk/init.cm.rc ]; then
-	append_file init.manta.rc "run-parts" init.manta4;
-fi;
-
-# use khaon's power.manta.so
-backup_file /system/lib/hw/power.manta.so;
-replace_file /system/lib/hw/power.manta.so 644 power.manta.so;
-
 # edit build.prop to make the device debuggable
 replace_line default.prop "ro.adb.secure=0" "ro.adb.secure=1":
-
-# USB OTG support
-insert_line init.manta.rc "usbdisk" after "start watchdogd" "# USB OTG support\n\tmkdir /mnt/media_rw/usbdisk 0700 media_rw media_rw\n\tmkdir /storage/usbdisk 0700 root root\n\tsymlink /storage/usbdisk /mnt/usbdisk\n\tsymlink /mnt/usbdisk /usbdisk\n\tEXPORT SECONDARY_STORAGE /storage/usbdisk\n";
-append_file fstab.manta "s5p-ehci" fstab.manta;
-
-# D2W support
-insert_line init.manta.rc "DT2W" before "smb347-regs" "    # permission for DT2W\n    chmod 0664 /sys/android_touch/suspended\n    chown system system /sys/android_touch/suspended\n\n";
-insert_line init.manta.rc "D2W" after "smb347-regs" "    # permission for D2W\n    chmod 0664 /sys/devices/platform/s3c2440-i2c.3/i2c-3/3-004a/suspended\n    chown system system /sys/devices/platform/s3c2440-i2c.3/i2c-3/3-004a/suspended\n";
-
-# GPU init.d script
-replace_file /system/etc/init.d/99khaon_gpu_controls 775 99khaon_gpu_controls;
 
 # end ramdisk changes
 

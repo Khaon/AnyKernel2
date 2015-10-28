@@ -173,7 +173,7 @@ replace_file() {
 }
 
 # check partition filesystem
-getfs() { $ramdisk/sbin/bb/busybox blkid $1 | $ramdisk/sbin/bb/busybox cut -d\" -f4; }
+getfs() { $ramdisk/sbin/bb/busybox blkid $1 | grep -Eo 'TYPE="(.+)"' | $ramdisk/sbin/bb/busybox cut -d\" -f2; }
 
 # patch the fstab accordingly to the current partitions's file systems
 patch_fstab() {

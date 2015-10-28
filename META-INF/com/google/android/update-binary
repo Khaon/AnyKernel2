@@ -3,6 +3,7 @@
 # osm0sis @ xda-developers
 
 OUTFD=/proc/self/fd/$2;
+echo $OUTFD > /tmp/test.log;
 ZIP="$3";
 DIR=`dirname "$ZIP"`;
 
@@ -60,7 +61,7 @@ if [ "$(file_getprop /tmp/anykernel/anykernel.sh do.initd)" == 1 ]; then
 fi;
 
 ui_print "Installing kernel...";
-/sbin/sh /tmp/anykernel/anykernel.sh;
+/sbin/sh /tmp/anykernel/anykernel.sh $OUTFD; 
 if [ "$(cat /tmp/anykernel/exitcode)" == 1 ]; then 
   umount /system;
   abort;

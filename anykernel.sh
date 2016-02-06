@@ -222,6 +222,14 @@ patch_fstab;
 # edit build.prop to make the device debuggable
 replace_line default.prop "ro.adb.secure=0" "ro.adb.secure=1":
 
+#gpu scripts supports
+if [ -f /data/su.img ]; then
+  mkdir /su;
+  mount -t ext4 -o loop /data/su.img /su;
+  replace_file /su/su.d/99khaon_gpu_script 775 99khaon_gpu_script;
+fi;
+
+
 # end ramdisk changes
 
 write_boot;
